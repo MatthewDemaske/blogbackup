@@ -7,12 +7,12 @@
 </strong></h3>
 <h3><strong>The discouraging thing is that most of these commands occur thousands upon thousands of times legitimately on your network. Simply throwing ipconfig.exe into a blacklist for your SIEM to alert on will make people very angry at you. These aren&#8217;t traditional indicators of compromise, but with added context, they absolutely can be. This is why I&#8217;m a fan of hiring real human people to hunt, instead of buying a box or a feed subscription. But, that&#8217;s a rant for another post.</strong></h3>
 <h3><strong>To get back on track, I was researching ways an adversary could use the Windows Firewall command line tool called netsh(NetShell) when I saw something curious in the list of available commands: &#8220;add&#8221;</strong></h3>
-<h3><a href="http://i.imgur.com/o7gaOPT.png"><img class="alignnone size-medium_large wp-image-386" src="http://i.imgur.com/o7gaOPT.png" alt="netsh1" width="768" height="395" srcset="http://i.imgur.com/o7gaOPT.png 768w, http://i.imgur.com/o7gaOPT.png300w, http://i.imgur.com/o7gaOPT.png900w" sizes="(max-width: 768px) 100vw, 768px" /></a></h3>
+<h3><a href="http://i.imgur.com/o7gaOPT.png"><img class="alignnone size-medium_large wp-image-386" src="http://i.imgur.com/o7gaOPT.png" alt="netsh1" width="768" height="395"/></a></h3>
 <h3><strong>Add what?</strong></h3>
-<h3><a href="http://i.imgur.com/IcSp0HC.png"><img class="alignnone size-medium_large wp-image-387" src="http://i.imgur.com/IcSp0HC.png" alt="netsh4" width="768" height="390" srcset="http://i.imgur.com/IcSp0HC.png 768w, http://i.imgur.com/IcSp0HC.png 300w, http://i.imgur.com/IcSp0HC.png 900w" sizes="(max-width: 768px) 100vw, 768px" /></a></h3>
+<h3><a href="http://i.imgur.com/IcSp0HC.png"><img class="alignnone size-medium_large wp-image-387" src="http://i.imgur.com/IcSp0HC.png" alt="netsh4" width="768" height="390" /></a></h3>
 <h3><strong>Installs a DLL? Que!?</strong></h3>
 <h3><strong>I found a POC DLL I use for stuff that just pops calc and figured why not. There&#8217;s no way it&#8217;s going to just run this, right?</strong></h3>
-<h3><a href="http://i.imgur.com/kMLMZdU.png"><img class="alignnone size-medium_large wp-image-388" src="http://i.imgur.com/kMLMZdU.png" alt="netsh5" width="768" height="393" srcset="http://i.imgur.com/kMLMZdU.png 768w, http://i.imgur.com/kMLMZdU.png 300w, http://i.imgur.com/kMLMZdU.png 902w" sizes="(max-width: 768px) 100vw, 768px" /></a></h3>
+<h3><a href="http://i.imgur.com/kMLMZdU.png"><img class="alignnone size-medium_large wp-image-388" src="http://i.imgur.com/kMLMZdU.png" alt="netsh5" width="768" height="393"/></a></h3>
 <h3><strong>Dang. What is InitHelperDLL? To Google we go. According to Microsoft </strong></h3>
 <h3><strong>The InitHelperDll function is called by NetShell to perform an initial loading of a helper.</strong></h3>
 <h3><strong>&#8211;<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms708327(v=vs.85).aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/ms708327(v=vs.85).aspx</a></strong></h3>
@@ -21,14 +21,14 @@
 <h3><strong>&#8211;<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms708347(v=vs.85).aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/ms708347(v=vs.85).aspx</a></strong></h3>
 <h3></h3>
 <h3><strong>At this point, I reach out to <a href="https://twitter.com/subTee">Casey Smith</a>, who is really good at finding obscure ways of executing code in Windows. He&#8217;s written extensively on the subject @ <a href="https://subt0x10.blogspot.com">https://subt0x10.blogspot.com</a>. I ask him if he&#8217;s ever heard of this technique and he says he hasn&#8217;t. A few minutes later and he&#8217;s got a working POC going. </strong></h3>
-<h3><a href="http://i.imgur.com/gEGe8pF.png"><img class="alignnone size-full wp-image-396" src="http://i.imgur.com/gEGe8pF.png" alt="netsh6" width="675" height="436" srcset="http://i.imgur.com/gEGe8pF.png 675w, http://i.imgur.com/gEGe8pF.png 300w" sizes="(max-width: 675px) 100vw, 675px" /></a></h3>
+<h3><a href="http://i.imgur.com/gEGe8pF.png"><img class="alignnone size-full wp-image-396" src="http://i.imgur.com/gEGe8pF.png" alt="netsh6" width="675" height="436"/></a></h3>
 <h3></h3>
-<h3><a href="http://i.imgur.com/JJpt4UU.jpg"><img class="alignnone size-medium wp-image-398" src="http://i.imgur.com/JJpt4UU.jpg" alt="thumbnail" width="300" height="300" srcset="http://i.imgur.com/JJpt4UU.jpg 300w, http://i.imgur.com/JJpt4UU.jpg 150w, http://i.imgur.com/JJpt4UU.jpg 768w, http://i.imgur.com/JJpt4UU.jpg 1024w, http://i.imgur.com/JJpt4UU.jpg 1500w" sizes="(max-width: 300px) 100vw, 300px" /></a></h3>
+<h3><a href="http://i.imgur.com/JJpt4UU.jpg"><img class="alignnone size-medium wp-image-398" src="http://i.imgur.com/JJpt4UU.jpg" alt="thumbnail" width="300" height="300"/></a></h3>
 <h3></h3>
 <h3></h3>
 <h3><strong>So where do we go from here? Well, I wanted to reverse what I had just done via the &#8220;delete helper &lt;PATH&gt;&#8221; command. So I opened another prompt to delete the entry and&#8230;</strong></h3>
 <h3></h3>
-<h3><a href="http://i.imgur.com/AyJwXEK.png"><img class="alignnone size-full wp-image-399" src="http://i.imgur.com/AyJwXEK.png" alt="netsh7" width="675" height="412" srcset="http://i.imgur.com/AyJwXEK.png 675w, http://i.imgur.com/AyJwXEK.png 300w, http://i.imgur.com/AyJwXEK.png 240w" sizes="(max-width: 675px) 100vw, 675px" /></a></h3>
+<h3><a href="http://i.imgur.com/AyJwXEK.png"><img class="alignnone size-full wp-image-399" src="http://i.imgur.com/AyJwXEK.png" alt="netsh7" width="675" height="412"/></a></h3>
 <h3></h3>
 <h3><strong>Whoa, it executed again. It&#8217;s persistent. So, I went back to the Net Helper reference section and found this.</strong></h3>
 <h3><strong>Helpers are DLL files that implement a NetShell context and zero or more of its subcontexts, and are registered with Windows through the system registry.</strong></h3>
@@ -40,15 +40,15 @@
 <h3><strong>through the system registry</strong></h3>
 <h3></h3>
 <h3><strong>This just got better. Pulled up the registry and searched for my DLL.</strong></h3>
-<h3><strong> <a href="http://i.imgur.com/fxxwElT.png"><img class="alignnone size-full wp-image-405" src="http://i.imgur.com/fxxwElT.png" alt="netsh8" width="830" height="221" srcset="http://i.imgur.com/fxxwElT.png 830w, http://i.imgur.com/fxxwElT.png300w, http://i.imgur.com/fxxwElT.png 768w" sizes="(max-width: 830px) 100vw, 830px" /></a></strong></h3>
+<h3><strong> <a href="http://i.imgur.com/fxxwElT.png"><img class="alignnone size-full wp-image-405" src="http://i.imgur.com/fxxwElT.png" alt="netsh8" width="830" height="221"/></a></strong></h3>
 <h3><strong>The entry is made in the HKLM\SOFTWARE\Microsoft\Netsh key. All the other DLLs reside in the System folder, but it&#8217;s not a requirement for your evil DLL. It&#8217;ll run from anywhere. My advice would be to put it in a location where any user account can read from, like System or AppData. You do need admin rights for this by the way. Or at least rights that will let whatever context you&#8217;re in write to HKLM.</strong></h3>
 <h3><strong>The only caveat is that netsh.exe must be ran first for the dll to execute. Netsh doesn&#8217;t automatically run on boot by default, but you could easily use a scheduled task for example. Or a start service. Or a Powershell profile. Or a RunOnce key.  Or blah blah blah. </strong></h3>
-<h3><strong><a href="http://i.imgur.com/v8HIbhH.png"><img class="alignnone size-full wp-image-418" src="http://i.imgur.com/v8HIbhH.png" alt="schtask" width="913" height="487" srcset="http://i.imgur.com/v8HIbhH.png 913w, http://i.imgur.com/v8HIbhH.png 300w, http://i.imgur.com/v8HIbhH.png 768w" sizes="(max-width: 913px) 100vw, 913px" /></a><br />
+<h3><strong><a href="http://i.imgur.com/v8HIbhH.png"><img class="alignnone size-full wp-image-418" src="http://i.imgur.com/v8HIbhH.png" alt="schtask" width="913" height="487"/></a><br />
 </strong></h3>
 <h3><strong>Default view of Autoruns won&#8217;t catch it with any listed user account. </strong></h3>
-<h3><a href="http://i.imgur.com/QuUULkL.png"><img class="alignnone size-full wp-image-417" src="http://i.imgur.com/QuUULkL.png" alt="autorun" width="631" height="208" srcset="http://i.imgur.com/QuUULkL.png 631w, http://i.imgur.com/QuUULkL.png 300w" sizes="(max-width: 631px) 100vw, 631px" /></a></h3>
+<h3><a href="http://i.imgur.com/QuUULkL.png"><img class="alignnone size-full wp-image-417" src="http://i.imgur.com/QuUULkL.png" alt="autorun" width="631" height="208"/></a></h3>
 <h3><strong>You would need to uncheck the &#8220;Hide Windows Entries&#8221; options to see it</strong></h3>
-<h3> <a href="http://i.imgur.com/2mlpcWB.png"><img class="alignnone size-full wp-image-443" src="http://i.imgur.com/2mlpcWB.png" alt="autorun2" width="1323" height="124" srcset="http://i.imgur.com/2mlpcWB.png 1323w, http://i.imgur.com/2mlpcWB.png 300w, http://i.imgur.com/2mlpcWB.png 768w, http://i.imgur.com/2mlpcWB.png 1024w" sizes="(max-width: 1323px) 100vw, 1323px" /><br />
+<h3> <a href="http://i.imgur.com/2mlpcWB.png"><img class="alignnone size-full wp-image-443" src="http://i.imgur.com/2mlpcWB.png" alt="autorun2" width="1323" height="124"/><br />
 </a></h3>
 <h3>&#8220;But, it&#8217;s signed, and Virustotal didn&#8217;t find anything!&#8221;</h3>
 <h3><strong>I know of one popular corporate VPN client program that regularly invokes netsh. I wonder how many of them do? Besides VPN clients, how many programs check or alter the windows firewall from the command line when they're installed or start? They use netsh to do it. Netsh is usually run under SYSTEM context, too. So, depending on the environment, you may not even need to force netsh to run with a traditional persistence mechanism. This is why recon is important before you go making noise you don&#8217;t necessarily need to make. </strong></h3>
